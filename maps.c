@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "fdf.h"
 #include "libft/includes/libft.h"
+#include <stdlib.h>
 
 int			ft_map(char *filename)
 {
@@ -31,11 +32,11 @@ int			ft_rdmap(t_map **map, char *filename)
 	(*map)->fd = open(filename, O_RDONLY);
 	if ((*map)->fd < 0)
 		return (0);
-	(*map)->buff = ft_strnew(1);
 	while ((*map)->check > 0)
 	{
 		(*map)->check = get_next_line((*map)->fd, &(*map)->line);
 		ft_lineparse((*map)->line, (*map)->rows, &points);
+		printf("\n");
 		(*map)->rows++;
 	}
 	if ((*map)->check < 0)
@@ -48,19 +49,24 @@ void		ft_lineparse(char *line, int y, t_list **points)
 	t_point	*point;
 	int		i;
 	int		test;
+	int		oatoi;
 
 	init_point(&point);
 	point->y = y;
 	i = 0;
-	while (*line != '\0')
+	printf("line = %s\tlen = %zu\n", line, ft_strlen(line));
+	while (line[i] != '\0')
 	{
-		if (*line == ' ')
+		if (line[i] == ' ')
 		{
 			line++;
 			i++;
 		}
 		test = ft_atoi(line);
-		printf("test = %d\n", test);
+		oatoi = atoi(line);
+		printf("test = %d\tatoi = %d\n", test, oatoi);
+		line++;
+		i++;
 	}
 	if (!*points)
 		*points = ft_lstnew(point, sizeof(t_point));

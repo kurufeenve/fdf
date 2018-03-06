@@ -72,7 +72,6 @@ typedef	struct		s_map
 	t_list			*row;
 	int				check;
 	char			*line;
-	char			*buff;
 }					t_map;
 
 typedef struct		s_point
