@@ -67,9 +67,8 @@ typedef	struct		s_map
 {
 	int				fd;
 	int				rows;
-	size_t			len;
+	int				len;
 	t_list			*points;
-	t_list			*row;
 	int				check;
 	char			*line;
 }					t_map;
@@ -89,6 +88,8 @@ void				init_point(t_point **point);
 t_line				*ft_coef(t_line *line);
 int					ft_rdmap(t_map **map, char *filename);
 int					ft_map(char *filename);
-void				ft_lineparse(char *line, int y, t_list **points);
+int					ft_lineparse(t_map **map, t_list **points);
+int					rawlenvalidation(t_map **map, int numpoints);
+void				read_points(t_list *points);
 
 #endif
