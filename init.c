@@ -47,15 +47,21 @@ void	init_map(t_map **map)
 	*map = (t_map *)malloc(sizeof(t_map));
 	(*map)->len = 0;
 	(*map)->rows = 0;
-	(*map)->check = 1;
 	(*map)->fd = 0;
-	(*map)->line = ft_strnew(0);
+	(*map)->line = NULL;
+	(*map)->list = NULL;
+	(*map)->x = 0;
+	(*map)->y = 0;
+	(*map)->z = 0;
 }
 
-void	init_point(t_point **point)
+t_point	init_point(double x, double y, double z)
 {
-	*point = (t_point *)malloc(sizeof(t_point));
-	(*point)->x = 0;
-	(*point)->y = 0;
-	(*point)->z = 0;
+	t_point	point;
+
+	//point = (t_point *)malloc(sizeof(t_point));
+	point.x = x;
+	point.y = y;
+	point.z = z;
+	return (point);
 }

@@ -20,80 +20,105 @@ int			ft_map(char *filename)
 
 	init_map(&map);
 	if (ft_rdmap(&map, filename) == 0)
+	{	printf("ft_rdmap returned 0\n");
 		return (0);
-	ft_lstiter(map->points, read_points);
-	printf("map->line = %s\nmap->rows = %d\n", map->line, map->rows);
+	}
+	ft_lineparse(&map);
+	//ft_readlist(map);
+	system("leaks fdf");
 	return (1);
 }
 
 int			ft_rdmap(t_map **map, char *filename)
 {
-	t_list	*points;
+	int		buff;
+	int		l;
 
+	l = 0;
 	(*map)->fd = open(filename, O_RDONLY);
 	if ((*map)->fd < 0)
 		return (0);
-	while ((*map)->check > 0)
+	while (get_next_line((*map)->fd, &(*map)->line) > 0)
 	{
-		(*map)->check = get_next_line((*map)->fd, &(*map)->line);
-		ft_lineparse(map, &points);
-		printf("\n");
+		buff = ft_countnum((*map)->line);
+		if ((*map)->len == buff)
+			(*map)->len = buff;
+		else if (l == 0)
+			(*map)->len = buff;
+		else
+			return (0);
+		l = 1;
+		ft_lstaddend(&(*map)->list, ft_lstnew((*map)->line, ft_strlen((*map)->line)));
 		if((*map)->line != NULL)
 			(*map)->rows++;
+		ft_strdel(&(*map)->line);
 	}
-	if ((*map)->check < 0)
-		return (0);
 	return (1);
 }
 
-int			ft_lineparse(t_map **map, t_list **points)
+void		ft_lineparse(t_map **map)
 {
-	t_point	*point;
-	char	*buff;
+	t_list	*buff;
+	char	*buff2;
+	int		i;
 
-	init_point(&point);
-	point->x = 0;
-	if ((*map)->line == NULL)
-		return (0);
-	buff = ft_strnew(ft_strlen((*map)->line) + 1);
-	buff = ft_strcpy(buff, (*map)->line);
-	while (*buff != '\0')
+	buff = (*map)->list;
+	i = 0;
+	(*map)->points = (t_point *)malloc(sizeof(t_point) *
+	((*map)->rows * (*map)->len));
+	while (buff != NULL)
 	{
-		point->y = (*map)->rows;
-		point->z = ft_atoi(buff);
-		while (ft_isdigit(*buff) == 1 || *buff == '-')
-			buff++;
-		if (*buff == ' ')
-			buff++;
-		//printf("x = %d\ty = %d\tz = %d\n", point->x, point->y, point->z);
-		if (!*points)
-			*points = ft_lstnew(point, sizeof(t_point));
-		else
-			ft_lstadd(points, ft_lstnew(point, sizeof(t_point)));
-		(*points)->content = point;
-		point->x++;
+		(*map)->x = 0;
+		buff2 = buff->content;
+		while (buff2[1] != '\0')
+		{
+			while (*buff2 == ' ')
+				buff2++;
+			(*map)->z = ft_atoi(buff2);
+			while ((*buff2 >= '0' && *buff2 <= '9') || *buff2 == '-')
+				buff2++;
+			(*map)->points[i] = init_point((*map)->x, (*map)->y, (*map)->z);
+			(*map)->x++;
+			i++;
+		}
+		(*map)->y++;
+		buff = buff->next;
 	}
-	if (rawlenvalidation(map, point->x) == 0)
-		return (0);
-	return (1);
 }
 
-int			rawlenvalidation(t_map **map, int numpoints)
+void		ft_readlist(t_map *map)
 {
-	if ((*map)->len == 0)
+	int		i;
+
+	i = 0;
+	while (i < (map->rows * map->len))
 	{
-		(*map)->len = numpoints;
-		return (1);
+		printf("i = %d, x = %f, y = %f, z = %f\n", i, map->points[i].x, map->points[i].y, map->points[i].z);
+		i++;
 	}
-	else if ((*map)->len != numpoints && (*map)->len > 0)
-		return (0);
-	return (1);
 }
 
-void		read_points(t_list *points)
+int			ft_countnum(char *line)
 {
-	t_point	*point;
+	int		count;
+	int		i;
+	int		l;
 
-	point = (t_point *)points->content;
-	printf("x = %d\ty = %d\tz = %d\n", (int)point->x, (int)point->y, (int)point->z);
+	count = 0;
+	i = 0;
+	l = 0;
+	if (!line || ft_strlen(line) <= 0)
+		return (0);
+	while (line[i] != '\0')
+	{
+		if (l == 0 && ft_isdigit(line[i]) == 1)
+		{
+			l = 1;
+			count ++;
+		}
+		else if (ft_isdigit(line[i]) == 0)
+			l = 0;
+		i++;
+	}
+	return (count);
 }

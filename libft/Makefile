@@ -24,7 +24,7 @@ OFILES = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.
 		ft_strnequ.o ft_strnew.o ft_strnstr.o ft_strrchr.o ft_strsplit.o ft_strstr.o \
 		ft_strsub.o ft_strtrim.o ft_tolower.o ft_toupper.o ft_lstnew.o ft_lstmap.o \
 		ft_lstdelone.o ft_lstdel.o ft_lstadd.o ft_lstiter.o ft_arrtozero.o ft_newarrtozero.o \
-		ft_printarr.o ft_realloc.o get_next_line.o ft_memkill.o
+		ft_printarr.o ft_realloc.o get_next_line.o ft_memkill.o ft_lstaddend.o
 
 FLAG = -Wall -Wextra -Werror
 

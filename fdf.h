@@ -63,33 +63,39 @@ typedef	struct		s_pixel
 	int				color;
 }					t_pixel;
 
+typedef struct		s_point
+{
+	double			x;
+	double			y;
+	double			z;
+	//t_color			*color;
+}					t_point;
+
 typedef	struct		s_map
 {
 	int				fd;
 	int				rows;
 	int				len;
-	t_list			*points;
-	int				check;
 	char			*line;
-}					t_map;
+	t_list			*list;
+	t_point			*points;
+	double			x;
+	double			y;
+	double			z;
 
-typedef struct		s_point
-{
-	int				x;
-	int				y;
-	int				z;
-}					t_point;
+}					t_map;
 
 void				mlx_struct_null(t_mlx **ptr);
 void				init_line(t_line **line);
 void				init_img(t_img **img);
 void				init_map(t_map **map);
-void				init_point(t_point **point);
+t_point				init_point(double x, double y, double z);
 t_line				*ft_coef(t_line *line);
 int					ft_rdmap(t_map **map, char *filename);
 int					ft_map(char *filename);
-int					ft_lineparse(t_map **map, t_list **points);
-int					rawlenvalidation(t_map **map, int numpoints);
-void				read_points(t_list *points);
+void				ft_lineparse(t_map **map);
+int					ft_countnum(char *line);
+void				ft_readlist(t_map *map);
+void				ft_recalc(t_map *map, t_mlx *ent);
 
 #endif

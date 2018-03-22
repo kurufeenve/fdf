@@ -92,5 +92,6 @@ int					**ft_newarrtozero(size_t i, size_t j);
 void				ft_printarr(int **arr, size_t j);
 char				*ft_realloc(char *str, size_t size);
 void				ft_memkill(char **res, int i);
+void				ft_lstaddend(t_list **alst, t_list *new);
 
 #endif

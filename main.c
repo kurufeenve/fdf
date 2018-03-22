@@ -15,9 +15,12 @@
 int		key_hook(int key, void *ptr)
 {
 	if (ptr == NULL)
-		printf("\033[0;31mEXIT\033[0m\n");
+		printf("key pressed = %d\n", key);
 	if (key == 53)
+	{
+		printf("\033[0;31mEXIT\033[0m\n");
 		exit (0);
+	}
 	return (0);
 }
 
@@ -39,37 +42,39 @@ int		main(int argc, char **argv)
 	t_line	*line1;
 	t_img	*img;
 	t_color	color;
+	//t_map	*map;
 
 
 	if (argc > 2)
 		return (0);
 	ft_map(argv[1]);
+	//system("leaks fdf");
 	mlx_struct_null(&ent);
 	init_line(&line1);
 	init_img(&img);
 	ent->init = mlx_init();
-	ent->size_x = 1600;
+	ent->size_x = 1000;
 	ent->size_y = 1000;
 	if (ent->init == NULL)
 		return (0);
 	ent->win = mlx_new_window(ent->init, ent->size_x, ent->size_y, "test");
 	if (ent->win == NULL)
 		return (0);
+	//ft_recalc(map, ent);
 	line1->bx = 1;
 	line1->by = 1;
 	line1->ex = 2;
 	line1->ey = 4;
 	ft_coef(line1);
-	printf("line1->k = %f\nline1->b = %f\n", line1->k, line1->b);
-	img->img = mlx_new_image(ent->init, ent->size_x - ent->size_x / 4, ent->size_y - 100);
+	//printf("line1->k = %f\nline1->b = %f\n", line1->k, line1->b);
+	img->img = mlx_new_image(ent->init, ent->size_x, ent->size_y);
 	if (img->img == NULL)
 		return (0);
 	img->image = mlx_get_data_addr(img->img, &img->bpp, &img->val, &img->ed);
-	printf("%d %d %d \n", img->bpp, img->val, img->ed);
 	color.color = 0xFFFFFF;
 	for (int x = 0; x < 400; x++)
 		put_pixel(img, x, x, color);
-	mlx_put_image_to_window(ent->init, ent->win, img->img, ent->size_x / 4, 100);
+	mlx_put_image_to_window(ent->init, ent->win, img->img, 0, 0);
 	mlx_hook(ent->win, 2, 5, key_hook, NULL);
 	mlx_hook(ent->win, 17, 1L << 17, exit_x, NULL);
 	mlx_loop(ent->init);
