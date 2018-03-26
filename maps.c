@@ -14,74 +14,71 @@
 #include "libft/includes/libft.h"
 #include <stdlib.h>
 
-int			ft_map(char *filename)
+int			ft_map(char *filename, t_map *map)
 {
-	t_map	*map;
-
-	init_map(&map);
-	if (ft_rdmap(&map, filename) == 0)
+	if (ft_rdmap(map, filename) == 0)
 	{	printf("ft_rdmap returned 0\n");
 		return (0);
 	}
-	ft_lineparse(&map);
+	ft_lineparse(map);
 	//ft_readlist(map);
-	system("leaks fdf");
+	//system("leaks fdf");
 	return (1);
 }
 
-int			ft_rdmap(t_map **map, char *filename)
+int			ft_rdmap(t_map *map, char *filename)
 {
 	int		buff;
 	int		l;
 
 	l = 0;
-	(*map)->fd = open(filename, O_RDONLY);
-	if ((*map)->fd < 0)
+	map->fd = open(filename, O_RDONLY);
+	if (map->fd < 0)
 		return (0);
-	while (get_next_line((*map)->fd, &(*map)->line) > 0)
+	while (get_next_line(map->fd, &map->line) > 0)
 	{
-		buff = ft_countnum((*map)->line);
-		if ((*map)->len == buff)
-			(*map)->len = buff;
+		buff = ft_countnum(map->line);
+		if (map->len == buff)
+			map->len = buff;
 		else if (l == 0)
-			(*map)->len = buff;
+			map->len = buff;
 		else
 			return (0);
 		l = 1;
-		ft_lstaddend(&(*map)->list, ft_lstnew((*map)->line, ft_strlen((*map)->line)));
-		if((*map)->line != NULL)
-			(*map)->rows++;
-		ft_strdel(&(*map)->line);
+		ft_lstaddend(&map->list, ft_lstnew(map->line, ft_strlen(map->line)));
+		if(map->line != NULL)
+			map->rows++;
+		ft_strdel(&map->line);
 	}
 	return (1);
 }
 
-void		ft_lineparse(t_map **map)
+void		ft_lineparse(t_map *map)
 {
 	t_list	*buff;
 	char	*buff2;
 	int		i;
 
-	buff = (*map)->list;
+	buff = map->list;
 	i = 0;
-	(*map)->points = (t_point *)malloc(sizeof(t_point) *
-	((*map)->rows * (*map)->len));
+	map->points = (t_point *)malloc(sizeof(t_point) *
+	(map->rows * map->len));
 	while (buff != NULL)
 	{
-		(*map)->x = 0;
+		map->x = 0;
 		buff2 = buff->content;
 		while (buff2[1] != '\0')
 		{
 			while (*buff2 == ' ')
 				buff2++;
-			(*map)->z = ft_atoi(buff2);
+			map->z = ft_atoi(buff2);
 			while ((*buff2 >= '0' && *buff2 <= '9') || *buff2 == '-')
 				buff2++;
-			(*map)->points[i] = init_point((*map)->x, (*map)->y, (*map)->z);
-			(*map)->x++;
+			map->points[i] = init_point(map->x, map->y, map->z);
+			map->x++;
 			i++;
 		}
-		(*map)->y++;
+		map->y++;
 		buff = buff->next;
 	}
 }

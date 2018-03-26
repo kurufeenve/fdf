@@ -30,6 +30,8 @@ void	init_line(t_line **line)
 	(*line)->ey = 0;
 	(*line)->k = 0;
 	(*line)->b = 0;
+	(*line)->dx = 0;
+	(*line)->dy = 0;
 }
 
 void	init_img(t_img **img)
@@ -59,7 +61,6 @@ t_point	init_point(double x, double y, double z)
 {
 	t_point	point;
 
-	//point = (t_point *)malloc(sizeof(t_point));
 	point.x = x;
 	point.y = y;
 	point.z = z;

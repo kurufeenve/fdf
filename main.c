@@ -40,17 +40,19 @@ int		main(int argc, char **argv)
 {
 	t_mlx	*ent;
 	t_line	*line1;
+	t_line	*line2;
 	t_img	*img;
 	t_color	color;
-	//t_map	*map;
-
+	t_map	*map;
 
 	if (argc > 2)
 		return (0);
-	ft_map(argv[1]);
-	//system("leaks fdf");
+	init_map(&map);
+	ft_map(argv[1], map);
+	system("leaks fdf");
 	mlx_struct_null(&ent);
 	init_line(&line1);
+	init_line(&line2);
 	init_img(&img);
 	ent->init = mlx_init();
 	ent->size_x = 1000;
@@ -60,20 +62,19 @@ int		main(int argc, char **argv)
 	ent->win = mlx_new_window(ent->init, ent->size_x, ent->size_y, "test");
 	if (ent->win == NULL)
 		return (0);
-	//ft_recalc(map, ent);
+	ft_recalc(map, ent);
 	line1->bx = 1;
 	line1->by = 1;
 	line1->ex = 2;
 	line1->ey = 4;
-	ft_coef(line1);
+	ft_coef(line1, img, color);
 	//printf("line1->k = %f\nline1->b = %f\n", line1->k, line1->b);
 	img->img = mlx_new_image(ent->init, ent->size_x, ent->size_y);
 	if (img->img == NULL)
 		return (0);
 	img->image = mlx_get_data_addr(img->img, &img->bpp, &img->val, &img->ed);
 	color.color = 0xFFFFFF;
-	for (int x = 0; x < 400; x++)
-		put_pixel(img, x, x, color);
+	ft_drawpoints(map, img, color, line2);
 	mlx_put_image_to_window(ent->init, ent->win, img->img, 0, 0);
 	mlx_hook(ent->win, 2, 5, key_hook, NULL);
 	mlx_hook(ent->win, 17, 1L << 17, exit_x, NULL);

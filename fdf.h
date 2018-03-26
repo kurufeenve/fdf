@@ -38,8 +38,8 @@ typedef struct		s_line
 	double			ey;
 	double			k;
 	double			b;
-	int				t;
-	int				*l;
+	double			dx;
+	double			dy;
 }					t_line;
 
 typedef union		s_color
@@ -90,12 +90,17 @@ void				init_line(t_line **line);
 void				init_img(t_img **img);
 void				init_map(t_map **map);
 t_point				init_point(double x, double y, double z);
-t_line				*ft_coef(t_line *line);
-int					ft_rdmap(t_map **map, char *filename);
-int					ft_map(char *filename);
-void				ft_lineparse(t_map **map);
+t_line				*ft_coef(t_line *line, t_img *img, t_color color);
+int					ft_rdmap(t_map *map, char *filename);
+int					ft_map(char *filename, t_map *map);
+void				ft_lineparse(t_map *map);
 int					ft_countnum(char *line);
 void				ft_readlist(t_map *map);
 void				ft_recalc(t_map *map, t_mlx *ent);
+void				ft_drawpoints(t_map *map, t_img *img, t_color color, t_line *line);
+void				put_pixel(t_img *img, int x, int y, t_color color);
+void				vertline(t_line *line, t_img *img, t_color color);
+int					defhline(t_line *line, t_map *map, int i);
+int					defvline(t_line *line, t_map *map, int i);
 
 #endif
