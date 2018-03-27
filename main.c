@@ -73,8 +73,7 @@ int		main(int argc, char **argv)
 		return (0);
 	img->image = mlx_get_data_addr(img->img, &img->bpp, &img->val, &img->ed);
 	color.color = 0xFFFFFF;
-	ft_coef(line1, img, color);
-	ft_drawpoints(map, img, color, line2);
+	ft_drawpoints(map, img, color);
 	ft_line(line2, map, color, img);
 	mlx_put_image_to_window(ent->init, ent->win, img->img, 0, 0);
 	mlx_hook(ent->win, 2, 5, key_hook, NULL);

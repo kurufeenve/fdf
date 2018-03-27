@@ -99,11 +99,11 @@ void				ft_lineparse(t_map *map);
 int					ft_countnum(char *line);
 void				ft_readlist(t_map *map);
 void				ft_recalc(t_map *map, t_mlx *ent);
-void				ft_drawpoints(t_map *map, t_img *img, t_color color, t_line *line);
+void				ft_drawpoints(t_map *map, t_img *img, t_color color);
 void				put_pixel(t_img *img, int x, int y, t_color color);
 void				vertline(t_line *line, t_img *img, t_color color);
-int					defhline(t_line *line, t_map *map, int i);
-int					defvline(t_line *line, t_map *map, int i);
+int					defline(t_line *line, t_map *map, int i, int l);
 void				ft_line(t_line *line, t_map *map, t_color color, t_img *img);
+void				drawline(t_line *line, t_img *img, t_color color);
 
 #endif

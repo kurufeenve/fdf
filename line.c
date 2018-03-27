@@ -23,6 +23,8 @@ t_line	*ft_coef(t_line *line, t_img *img, t_color color)
 	}
 	line->k = line->dy / line->dx;
 	line->b = line->by - line->k * line->bx;
+	if (line->k >= -1 || line->k <= 1)
+	drawline(line, img, color);
 	return (line);
 }
 
@@ -42,32 +44,49 @@ void	vertline(t_line *line, t_img *img, t_color color)
 		}
 }
 
-int		defhline(t_line *line, t_map *map, int i)
+int		defline(t_line *line, t_map *map, int i, int l)
 {
-	line->bx = map->points[i].x;
-	line->by = map->points[i].y;
-	if (i % map->len == 0)
-		return (0);
-	line->ex = map->points[i].x + map->coefx;
-	//line->ey = map->points[i + 1].y;
-	return (1);
+	if (l == 0)
+	{
+		if (map->points[i].x == (map->coefx * map->len) - map->coefx)
+			return (0);
+		line->bx = map->points[i].x;
+		line->by = map->points[i].y;
+		line->ex = map->points[i].x + map->coefx;
+		line->ey = map->points[i].y;
+		return (1);
+	}
+	else
+	{
+		if (map->points[i].y == (map->coefy * map->rows) - map->coefy)
+			return (0);
+		line->bx = map->points[i].x;
+		line->by = map->points[i].y;
+		line->ex = map->points[i].x;
+		line->ey = map->points[i].y + map->coefy;
+		return (1);
+	}
 }
 
-int		defvline(t_line *line, t_map *map, int i)
+void	drawline(t_line *line, t_img *img, t_color color)
 {
-	line->bx = map->points[i].x;
-	line->by = map->points[i].y;
-	if (i + map->len >= map->len * map->rows)
-		return (0);
-	//line->ex = map->points[i + map->len].x;
-	line->ey = map->points[i].y + map->coefy;
-	return (1);
+	if (line->k <= 1 && line->k >= -1)
+		while (line->bx <= line->ex)
+		{
+			put_pixel(img, (int)line->bx, (int)line->by, color);
+			line->by = line->k * line->bx + line->b;
+			printf("line->bx = %f\tline->by = %f\n", line->bx, line->by);
+			line->bx++;
+		}
+	else
+		while (line->bx <= line->ex)
+		{
+			put_pixel(img, (int)line->bx, (int)line->by, color);
+			line->bx = (line->by - line->b) / line->k;
+			printf("line->bx = %f\tline->by = %f\n", line->bx, line->by);
+			line->by++;
+		}
 }
-
-// void	drawline(t_line *line, t_img img, t_color color)
-// {
-
-// }
 
 void	ft_line(t_line *line, t_map *map, t_color color, t_img *img)
 {
@@ -76,11 +95,10 @@ void	ft_line(t_line *line, t_map *map, t_color color, t_img *img)
 	i = 0;
 	while (i < map->len * map->rows)
 	{
-		if (defhline(line, map, i) == 1)
-		{
-			ft_coef(line, img, color);
-			printf("bx = %f\tex = %f\nby = %f\tey = %f\n\n", line->bx, line->ex, line->by, line->ey);
-		}
+		defline(line, map, i, 0);
+		ft_coef(line, img, color);
+		defline(line, map, i, 1);
+		ft_coef(line, img, color);
 		i++;
 	}
 }

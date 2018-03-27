@@ -17,25 +17,25 @@ void	ft_recalc(t_map *map, t_mlx *ent)
 	int		i;
 
 	i = 0;
+	printf("map->len = %d, map->rows = %d\n", map->len, map->rows);
 	map->coefx = ent->size_x / map->len;
 	map->coefy = ent->size_y / map->rows;
 	while (i < (map->rows * map->len))
 	{
 		map->points[i].x = map->points[i].x * map->coefx;
-		map->points[i].y = map->points[i].y * map->coefy;
+		map->points[i].y = map->points[i].y * map->coefx;
 		i++;
 	}
 }
 
 
-void		ft_drawpoints(t_map *map, t_img *img, t_color color, t_line *line)
+void		ft_drawpoints(t_map *map, t_img *img, t_color color)
 {
 	int		i;
 
 	i = 0;
 	while (i < (map->rows * map->len))
 	{
-		if (defhline(line, map, i) == 1)
 		put_pixel(img, map->points[i].x, map->points[i].y, color);
 		i++;
 	}
