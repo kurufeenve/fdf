@@ -14,17 +14,15 @@
 
 void	ft_recalc(t_map *map, t_mlx *ent)
 {
-	double	coefx;
-	double	coefy;
 	int		i;
 
 	i = 0;
-	coefx = ent->size_x / map->len;
-	coefy = ent->size_y / map->rows;
+	map->coefx = ent->size_x / map->len;
+	map->coefy = ent->size_y / map->rows;
 	while (i < (map->rows * map->len))
 	{
-		map->points[i].x = map->points[i].x * coefx;
-		map->points[i].y = map->points[i].y * coefx;
+		map->points[i].x = map->points[i].x * map->coefx;
+		map->points[i].y = map->points[i].y * map->coefy;
 		i++;
 	}
 }

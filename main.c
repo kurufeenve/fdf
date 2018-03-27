@@ -49,11 +49,11 @@ int		main(int argc, char **argv)
 		return (0);
 	init_map(&map);
 	ft_map(argv[1], map);
-	system("leaks fdf");
 	mlx_struct_null(&ent);
 	init_line(&line1);
 	init_line(&line2);
 	init_img(&img);
+	system("leaks fdf");
 	ent->init = mlx_init();
 	ent->size_x = 1000;
 	ent->size_y = 1000;
@@ -67,14 +67,15 @@ int		main(int argc, char **argv)
 	line1->by = 1;
 	line1->ex = 2;
 	line1->ey = 4;
-	ft_coef(line1, img, color);
 	//printf("line1->k = %f\nline1->b = %f\n", line1->k, line1->b);
 	img->img = mlx_new_image(ent->init, ent->size_x, ent->size_y);
 	if (img->img == NULL)
 		return (0);
 	img->image = mlx_get_data_addr(img->img, &img->bpp, &img->val, &img->ed);
 	color.color = 0xFFFFFF;
+	ft_coef(line1, img, color);
 	ft_drawpoints(map, img, color, line2);
+	ft_line(line2, map, color, img);
 	mlx_put_image_to_window(ent->init, ent->win, img->img, 0, 0);
 	mlx_hook(ent->win, 2, 5, key_hook, NULL);
 	mlx_hook(ent->win, 17, 1L << 17, exit_x, NULL);

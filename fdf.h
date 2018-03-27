@@ -82,6 +82,8 @@ typedef	struct		s_map
 	double			x;
 	double			y;
 	double			z;
+	double			coefx;
+	double			coefy;
 
 }					t_map;
 
@@ -102,5 +104,6 @@ void				put_pixel(t_img *img, int x, int y, t_color color);
 void				vertline(t_line *line, t_img *img, t_color color);
 int					defhline(t_line *line, t_map *map, int i);
 int					defvline(t_line *line, t_map *map, int i);
+void				ft_line(t_line *line, t_map *map, t_color color, t_img *img);
 
 #endif

@@ -55,6 +55,8 @@ void	init_map(t_map **map)
 	(*map)->x = 0;
 	(*map)->y = 0;
 	(*map)->z = 0;
+	(*map)->coefx = 0;
+	(*map)->coefy = 0;
 }
 
 t_point	init_point(double x, double y, double z)
