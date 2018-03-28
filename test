@@ -1,13 +1,13 @@
-Process:         fdf [77765]
+Process:         fdf [62631]
 Path:            /Users/vordynsk/Documents/assignments/fdf/fdf
-Load Address:    0x10fecb000
+Load Address:    0x109b50000
 Identifier:      fdf
 Version:         ???
 Code Type:       X86-64
-Parent Process:  zsh [65085]
+Parent Process:  zsh [55836]
 
-Date/Time:       2018-03-27 18:17:25.187 +0300
-Launch Time:     2018-03-27 18:17:24.919 +0300
+Date/Time:       2018-03-28 18:50:09.697 +0300
+Launch Time:     2018-03-28 18:50:09.411 +0300
 OS Version:      Mac OS X 10.13.3 (17D47)
 Report Version:  7
 Analysis Tool:   /Applications/Xcode.app/Contents/Developer/usr/bin/leaks
@@ -15,14 +15,9 @@ Analysis Tool Version:  Xcode 9.2 (9C40b)
 ----
 
 leaks Report Version:  2.0
-Process 77765: 778 nodes malloced for 88 KB
-Process 77765: 0 leaks for 0 total leaked bytes.
+Process 62631: 780 nodes malloced for 88 KB
+Process 62631: 0 leaks for 0 total leaked bytes.
 map->len = 10, map->rows = 10
-line->bx = 1.000000	line->by = 1.000000
-line->bx = 1.333333	line->by = 2.000000
-line->bx = 1.666667	line->by = 3.000000
-line->bx = 2.000000	line->by = 4.000000
-line->bx = 2.333333	line->by = 5.000000
 line->bx = 0.000000	line->by = 0.000000
 line->bx = 1.000000	line->by = 0.000000
 line->bx = 2.000000	line->by = 0.000000

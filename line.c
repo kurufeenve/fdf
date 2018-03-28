@@ -33,13 +33,13 @@ void	vertline(t_line *line, t_img *img, t_color color)
 	if ((line->ey - line->by) > 0)
 		while (line->by < line->ey)
 		{
-			put_pixel(img, line->bx, line->by, color);
+			put_pixel(img, (int)line->bx, (int)line->by, color);
 			line->by++;
 		}
 	if ((line->ey - line->by) < 0)
 		while (line->by < line->ey)
 		{
-			put_pixel(img, line->bx, line->by, color);
+			put_pixel(img, (int)line->bx, (int)line->by, color);
 			line->by--;
 		}
 }
