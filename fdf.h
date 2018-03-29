@@ -84,7 +84,6 @@ typedef	struct		s_map
 	double			z;
 	double			coefx;
 	double			coefy;
-
 }					t_map;
 
 void				mlx_struct_null(t_mlx **ptr);
@@ -105,5 +104,9 @@ void				vertline(t_line *line, t_img *img, t_color color);
 int					defline(t_line *line, t_map *map, int i, int l);
 void				ft_line(t_line *line, t_map *map, t_color color, t_img *img);
 void				drawline(t_line *line, t_img *img, t_color color);
+void				turn_x(t_map *map, double alpha);
+void				turn_y(t_map *map, double alpha);
+void				turn_z(t_map *map, double alpha);
+void				ft_clearscr(t_img *img);
 
 #endif

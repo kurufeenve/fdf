@@ -40,3 +40,14 @@ void		ft_drawpoints(t_map *map, t_img *img, t_color color)
 		i++;
 	}
 }
+
+void	ft_clearscr(t_img *img)
+{
+	char	*buff;
+
+	buff = img->image;
+	while (*buff != '\0')
+	{
+		*buff = 0;
+	}
+}
