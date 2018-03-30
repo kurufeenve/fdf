@@ -17,7 +17,6 @@ void	ft_recalc(t_map *map, t_mlx *ent)
 	int		i;
 
 	i = 0;
-	printf("map->len = %d, map->rows = %d\n", map->len, map->rows);
 	map->coefx = ent->size_x / map->len;
 	map->coefy = ent->size_y / map->rows;
 	while (i < (map->rows * map->len))
@@ -41,13 +40,12 @@ void		ft_drawpoints(t_map *map, t_img *img, t_color color)
 	}
 }
 
-void	ft_clearscr(t_img *img)
+void	ft_clearscr(t_img *img, t_mlx *mlx)
 {
-	char	*buff;
+	int		i;
 
-	buff = img->image;
-	while (*buff != '\0')
-	{
-		*buff = 0;
-	}
+	i = 0;
+	printf("size_x = %d\tsize_y = %d\n", mlx->size_x, mlx->size_y);
+	while (i < mlx->size_x * mlx->size_y * 4)
+		img->image[i++] = 0;
 }

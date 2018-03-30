@@ -75,7 +75,6 @@ void	drawline(t_line *line, t_img *img, t_color color)
 		{
 			put_pixel(img, (int)line->bx, (int)line->by, color);
 			line->by = line->k * line->bx + line->b;
-			printf("line->bx = %f\tline->by = %f\n", line->bx, line->by);
 			line->bx++;
 		}
 	else
@@ -83,7 +82,6 @@ void	drawline(t_line *line, t_img *img, t_color color)
 		{
 			put_pixel(img, (int)line->bx, (int)line->by, color);
 			line->bx = (line->by - line->b) / line->k;
-			printf("line->bx = %f\tline->by = %f\n", line->bx, line->by);
 			line->by++;
 		}
 }
