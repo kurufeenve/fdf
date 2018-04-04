@@ -12,53 +12,14 @@
 
 #include "fdf.h"
 
-void	turn_x(t_map *map, double alpha)
+void	turn(t_map *map, double a, double b, double g)
 {
-	double	cosa;
-	double	sina;
 	int		i;
 
 	i = 0;
-	cosa = cos(alpha);
-	sina = sin(alpha);
-	while (i < map->rows * map->len)
+	while (i < map->len * map->rows)
 	{
-		map->points[i].y = map->points[i].y * cosa + map->points[i].z * sina;
-		map->points[i].z = map->points[i].z * cosa - map->points[i].y * sina;
-		i++;
-	}
-}
-
-void	turn_y(t_map *map, double alpha)
-{
-	double	cosa;
-	double	sina;
-	int		i;
-
-	i = 0;
-	cosa = cos(alpha);
-	sina = sin(alpha);
-	while (i < map->rows * map->len)
-	{
-		map->points[i].x = map->points[i].x * cosa + map->points[i].z * sina;
-		map->points[i].z = map->points[i].z * cosa - map->points[i].x * sina;
-		i++;
-	}
-}
-
-void	turn_z(t_map *map, double alpha)
-{
-	double	cosa;
-	double	sina;
-	int		i;
-
-	i = 0;
-	cosa = cos(alpha);
-	sina = sin(alpha);
-	while (i < map->rows * map->len)
-	{
-		map->points[i].x = map->points[i].x * cosa - map->points[i].y * sina;
-		map->points[i].y = map->points[i].y * cosa + map->points[i].x * sina;
-		i++;
+		map->points[i].x = map->points[i].x * cos(b) * cos(g) + map->points[i].z * sin(b) - map->points[i].y * cos(b) * sin(g);
+		map->points[i].y = -map->points[i].z * cos(b) * sin(a) + map->points[i].x * (cos(g) * sin (a) * sin(b) + cos(a) * sin(g)) + map->points[i].y * (cos(a) * cos(g) - sin(a) * sin(b) * sin(g));
 	}
 }

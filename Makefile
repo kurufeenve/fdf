@@ -14,9 +14,9 @@ NAME = fdf
 
 HEADER = fdf.h
 
-SOURCES = main.c line.c init.c maps.c points.c
+SOURCES = main.c line.c init.c maps.c points.c turn.c
 
-OBJFILES = main.o line.o init.o maps.o points.o
+OBJFILES = main.o line.o init.o maps.o points.o turn.o
 
 MAKE = make
 

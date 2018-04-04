@@ -12,51 +12,44 @@
 
 #include "fdf.h"
 
-void	mlx_struct_null(t_mlx **ptr)
+void	init_gen(t_general *ptr)
 {
-	*ptr = (t_mlx *)malloc(sizeof(t_mlx));
-	(*ptr)->init = NULL;
-	(*ptr)->win = NULL;
-	(*ptr)->size_x = 0;
-	(*ptr)->size_y = 0;
+	ptr->mlx.init = NULL;
+	ptr->mlx.win = NULL;
+	ptr->mlx.size_x = 0;
+	ptr->mlx.size_y = 0;
+	ptr->line.bx = 0;
+	ptr->line.by = 0;
+	ptr->line.ex = 0;
+	ptr->line.ey = 0;
+	ptr->line.k = 0;
+	ptr->line.b = 0;
+	ptr->line.dx = 0;
+	ptr->line.dy = 0;
+	init_img(&ptr->img);
+	init_map(&ptr->map);
 }
 
-void	init_line(t_line **line)
+void	init_img(t_img *img)
 {
-	*line = (t_line *)malloc(sizeof(t_line));
-	(*line)->bx = 0;
-	(*line)->by = 0;
-	(*line)->ex = 0;
-	(*line)->ey = 0;
-	(*line)->k = 0;
-	(*line)->b = 0;
-	(*line)->dx = 0;
-	(*line)->dy = 0;
+	img->bpp = 0;
+	img->ed = 0;
+	img->val = 0;
+	img->img = NULL;
+	img->image = NULL;
 }
 
-void	init_img(t_img **img)
+void	init_map(t_map *map)
 {
-	*img = (t_img *)malloc(sizeof(t_img));
-	(*img)->bpp = 0;
-	(*img)->ed = 0;
-	(*img)->val = 0;
-	(*img)->img = NULL;
-	(*img)->image = NULL;
-}
-
-void	init_map(t_map **map)
-{
-	*map = (t_map *)malloc(sizeof(t_map));
-	(*map)->len = 0;
-	(*map)->rows = 0;
-	(*map)->fd = 0;
-	(*map)->line = NULL;
-	(*map)->list = NULL;
-	(*map)->x = 0;
-	(*map)->y = 0;
-	(*map)->z = 0;
-	(*map)->coefx = 0;
-	(*map)->coefy = 0;
+	map->len = 0;
+	map->rows = 0;
+	map->fd = 0;
+	map->list = NULL;
+	map->x = 0;
+	map->y = 0;
+	map->z = 0;
+	map->coefx = 0;
+	map->coefy = 0;
 }
 
 t_point	init_point(double x, double y, double z)

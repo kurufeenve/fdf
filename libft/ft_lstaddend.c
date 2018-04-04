@@ -18,7 +18,6 @@ void	ft_lstaddend(t_list **alst, t_list *new)
 
 	if (new == NULL || (*alst == NULL && (*alst = new)))
 		return ;
-	//system("leaks fdf");
 	buff = *alst;
 	while (buff->next != NULL)
 		buff = buff->next;

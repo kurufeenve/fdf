@@ -22,7 +22,7 @@ void	ft_recalc(t_map *map, t_mlx *ent)
 	while (i < (map->rows * map->len))
 	{
 		map->points[i].x = map->points[i].x * map->coefx;
-		map->points[i].y = map->points[i].y * map->coefx;
+		map->points[i].y = map->points[i].y * map->coefy;
 		i++;
 	}
 }
@@ -45,7 +45,6 @@ void	ft_clearscr(t_img *img, t_mlx *mlx)
 	int		i;
 
 	i = 0;
-	printf("size_x = %d\tsize_y = %d\n", mlx->size_x, mlx->size_y);
 	while (i < mlx->size_x * mlx->size_y * 4)
 		img->image[i++] = 0;
 }

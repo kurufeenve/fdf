@@ -21,8 +21,6 @@ int			ft_map(char *filename, t_map *map)
 		return (0);
 	}
 	ft_lineparse(map);
-	//ft_readlist(map);
-	//system("leaks fdf");
 	return (1);
 }
 

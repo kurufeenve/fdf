@@ -12,14 +12,27 @@
 #include <stdio.h>
 #include "fdf.h"
 
-int		key_hook(int key, void *ptr, t_img *img, t_mlx *ent)
+int		key_hook(int key, void *ptr)
 {
+	t_general	*g;
+	g = ptr;
 	if (ptr == NULL)
 		printf("key pressed = %d\n", key);
-	if (key == 126 || key == 125)
+	if (key == 126)
 	{
-		ft_clearscr(img, ent);
-		mlx_put_image_to_window(ent->init, ent->win, img->img, 0, 0);
+		ft_clearscr(&g->img, &g->mlx);
+		printf("1. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z); 
+		printf("2. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z);
+		ft_line(&g->line, &g->map, g->color, &g->img);
+		mlx_put_image_to_window(g->mlx.init, g->mlx.win, g->img.img, 49, 49);
+	}
+	else if (key == 125)
+	{
+		ft_clearscr(&g->img, &g->mlx);
+		printf("3. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z);
+		printf("4. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z);
+		ft_line(&g->line, &g->map, g->color, &g->img);
+		mlx_put_image_to_window(g->mlx.init, g->mlx.win, g->img.img, 49, 49);
 	}
 	if (key == 53)
 	{
@@ -52,48 +65,31 @@ void	read_image(t_img *img, t_mlx *mlx)
 
 int		main(int argc, char **argv)
 {
-	t_mlx	*ent;
-	t_line	*line1;
-	t_line	*line2;
-	t_img	*img;
-	t_color	color;
-	t_map	*map;
+	t_general	gen;
 
 	if (argc > 2)
 		return (0);
-	init_map(&map);
-	ft_map(argv[1], map);
-	mlx_struct_null(&ent);
-	init_line(&line1);
-	init_line(&line2);
-	init_img(&img);
+	init_gen(&gen);
+	ft_map(argv[1], &gen.map);
+	gen.mlx.init = mlx_init();
+	gen.mlx.size_x = 1000;
+	gen.mlx.size_y = 1000;
+	if (gen.mlx.init == NULL)
+		return (0);
+	gen.mlx.win = mlx_new_window(gen.mlx.init, gen.mlx.size_x, gen.mlx.size_y, "test");
+	if (gen.mlx.win == NULL)
+		return (0);
+	ft_recalc(&gen.map, &gen.mlx);
+	gen.img.img = mlx_new_image(gen.mlx.init, gen.mlx.size_x, gen.mlx.size_y);
+	if (gen.img.img == NULL)
+		return (0);
+	gen.img.image = mlx_get_data_addr(gen.img.img, &gen.img.bpp, &gen.img.val, &gen.img.ed);
+	gen.color.color = 0xFFFFFF;
+	ft_line(&gen.line, &gen.map, gen.color, &gen.img);
+	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, 49, 49);
+	mlx_hook(gen.mlx.win, 2, 5, key_hook, &gen);
 	system("leaks fdf");
-	ent->init = mlx_init();
-	ent->size_x = 1000;
-	ent->size_y = 1000;
-	if (ent->init == NULL)
-		return (0);
-	ent->win = mlx_new_window(ent->init, ent->size_x, ent->size_y, "test");
-	if (ent->win == NULL)
-		return (0);
-	ft_recalc(map, ent);
-	line1->bx = 1;
-	line1->by = 1;
-	line1->ex = 2;
-	line1->ey = 4;
-	//printf("line1->k = %f\nline1->b = %f\n", line1->k, line1->b);
-	img->img = mlx_new_image(ent->init, ent->size_x, ent->size_y);
-	if (img->img == NULL)
-		return (0);
-	img->image = mlx_get_data_addr(img->img, &img->bpp, &img->val, &img->ed);
-	color.color = 0xFFFFFF;
-	ft_drawpoints(map, img, color);
-	ft_line(line2, map, color, img);
-	//read_image(img, ent);
-	mlx_put_image_to_window(ent->init, ent->win, img->img, 49, 49);
-	//read_image(img, ent);
-	mlx_hook(ent->win, 2, 5, key_hook, NULL);
-	mlx_hook(ent->win, 17, 1L << 17, exit_x, NULL);
-	mlx_loop(ent->init);
+	mlx_hook(gen.mlx.win, 17, 1L << 17, exit_x, NULL);
+	mlx_loop(gen.mlx.init);
 	return (0);
 }
