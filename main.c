@@ -17,23 +17,15 @@ int		key_hook(int key, void *ptr)
 	t_general	*g;
 	g = ptr;
 	if (ptr == NULL)
-		printf("key pressed = %d\n", key);
+		return (0);
 	if (key == 126)
-	{
-		ft_clearscr(&g->img, &g->mlx);
-		printf("1. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z); 
-		printf("2. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z);
-		ft_line(&g->line, &g->map, g->color, &g->img);
-		mlx_put_image_to_window(g->mlx.init, g->mlx.win, g->img.img, 49, 49);
-	}
+		turn(ptr, 0.087266462599716, 0, 0);
 	else if (key == 125)
-	{
-		ft_clearscr(&g->img, &g->mlx);
-		printf("3. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z);
-		printf("4. x = %f, y = %f, z = %f\n", g->map.points[99].x, g->map.points[99].y, g->map.points[99].z);
-		ft_line(&g->line, &g->map, g->color, &g->img);
-		mlx_put_image_to_window(g->mlx.init, g->mlx.win, g->img.img, 49, 49);
-	}
+		turn(ptr, -0.087266462599716, 0, 0);
+	else if (key == 124)
+		turn(ptr, 0, 0.087266462599716, 0);
+	else if (key == 123)
+		turn(ptr, 0, -0.087266462599716, 0);
 	if (key == 53)
 	{
 		printf("\033[0;31mEXIT\033[0m\n");
@@ -51,6 +43,7 @@ void	put_pixel(t_img *img, int x, int y, t_color color)
 
 int exit_x(void)
 {
+	printf("\033[0;31mEXIT\033[0m\n");
 	exit(1);
 }
 
@@ -88,8 +81,8 @@ int		main(int argc, char **argv)
 	ft_line(&gen.line, &gen.map, gen.color, &gen.img);
 	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, 49, 49);
 	mlx_hook(gen.mlx.win, 2, 5, key_hook, &gen);
-	system("leaks fdf");
 	mlx_hook(gen.mlx.win, 17, 1L << 17, exit_x, NULL);
+	system("leaks fdf");
 	mlx_loop(gen.mlx.init);
 	return (0);
 }

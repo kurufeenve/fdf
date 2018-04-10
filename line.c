@@ -48,22 +48,28 @@ int		defline(t_line *line, t_map *map, int i, int l)
 {
 	if (l == 0)
 	{
-		if (map->points[i].x == (map->coefx * map->len) - map->coefx)
+		if ((i + 1) % map->len == 0)
 			return (0);
+		//printf("map->points[%d].x = %f\tmap->points[%d].y = %f\n", i, map->points[i].x, i, map->points[i].y);
 		line->bx = map->points[i].x;
 		line->by = map->points[i].y;
-		line->ex = map->points[i].x + map->coefx;
+		i++;
+		line->ex = map->points[i].x/* + map->coefx*/;
 		line->ey = map->points[i].y;
+		//printf("line->bx = %f\tline->by = %f\tline->ex = %f\tline->ey = %f\n\n========\n\n", line->bx, line->by, line->ex, line->ey);
 		return (1);
 	}
 	else
 	{
-		if (map->points[i].y == (map->coefy * map->rows) - map->coefy)
+		if (i >= (map->rows * map->len - map->len))
 			return (0);
+		//printf("map->points[%d].x = %f\tmap->points[%d].y = %f\n", i, map->points[i].x, i, map->points[i].y);
 		line->bx = map->points[i].x;
 		line->by = map->points[i].y;
+		i = i + map->len;
 		line->ex = map->points[i].x;
-		line->ey = map->points[i].y + map->coefy;
+		line->ey = map->points[i].y/* + map->coefy*/;
+		//printf("line->bx = %f\tline->by = %f\tline->ex = %f\tline->ey = %f\n\n========\n\n", line->bx, line->by, line->ex, line->ey);
 		return (1);
 	}
 }

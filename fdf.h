@@ -108,5 +108,6 @@ void				ft_line(t_line *line, t_map *map, t_color color, t_img *img);
 void				drawline(t_line *line, t_img *img, t_color color);
 void				ft_clearscr(t_img *img, t_mlx *mlx);
 int					key_hook(int key, void *ptr);
+void				turn(t_general *gen, double a, double b, double g);
 
 #endif
