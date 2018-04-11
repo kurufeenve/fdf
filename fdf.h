@@ -32,10 +32,10 @@ typedef struct		s_mlx
 
 typedef struct		s_line
 {
-	double			bx;
-	double			by;
-	double			ex;
-	double			ey;
+	double			x0;
+	double			y0;
+	double			x1;
+	double			y1;
 	double			k;
 	double			b;
 	double			dx;

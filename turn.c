@@ -21,7 +21,7 @@ void	turn(t_general *gen, double a, double b, double g)
 
 	i = 0;
 	ft_clearscr(&gen->img, &gen->mlx);
-	printf("1. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
+	//printf("1. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
 	while (i < gen->map.len * gen->map.rows)
 	{
 		tmpx = gen->map.points[i].x;
@@ -37,7 +37,7 @@ void	turn(t_general *gen, double a, double b, double g)
 		cos(a) * sin(b) * sin(g));
 		i++;
 	}
-	printf("2. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
+	//printf("2. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
 	ft_line(&gen->line, &gen->map, gen->color, &gen->img);
 	mlx_put_image_to_window(gen->mlx.init, gen->mlx.win, gen->img.img, 49, 49);
 }

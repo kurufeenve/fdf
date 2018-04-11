@@ -17,7 +17,8 @@
 int			ft_map(char *filename, t_map *map)
 {
 	if (ft_rdmap(map, filename) == 0)
-	{	printf("ft_rdmap returned 0\n");
+	{	
+		printf("ft_rdmap returned 0\n");
 		return (0);
 	}
 	ft_lineparse(map);
@@ -72,6 +73,8 @@ void		ft_lineparse(t_map *map)
 			map->z = ft_atoi(buff2);
 			while ((*buff2 >= '0' && *buff2 <= '9') || *buff2 == '-')
 				buff2++;
+			if (*buff2 == '\0')
+				break ;
 			map->points[i] = init_point(map->x, map->y, map->z);
 			map->x++;
 			i++;

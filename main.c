@@ -64,6 +64,7 @@ int		main(int argc, char **argv)
 		return (0);
 	init_gen(&gen);
 	ft_map(argv[1], &gen.map);
+	printf("test1\n");
 	gen.mlx.init = mlx_init();
 	gen.mlx.size_x = 1000;
 	gen.mlx.size_y = 1000;
