@@ -12,16 +12,9 @@
 #include <stdio.h>
 #include "fdf.h"
 
-void	line(t_general *gen)
+void	plotline(t_general *gen)
 {
-	int		i;
-
-	i = 0;
-	while (i < gen->map.len * gen->map.rows)
-	{
-		defline(&gen->line, &gen->map, i, 0);
-
-	}
+	if ()
 }
 
 void	drawline(t_general	*gen)
@@ -35,7 +28,7 @@ void	drawline(t_general	*gen)
 	}
 	gen->line.k = gen->line.dy / gen->line.dx;
 	gen->line.b = gen->line.y0 - gen->line.k * gen->line.x0;
-	
+	if ()
 }
 
 void	vertline(t_line *line, t_img *img, t_color color)
