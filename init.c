@@ -18,10 +18,10 @@ void	init_gen(t_general *ptr)
 	ptr->mlx.win = NULL;
 	ptr->mlx.size_x = 0;
 	ptr->mlx.size_y = 0;
-	ptr->line.bx = 0;
-	ptr->line.by = 0;
-	ptr->line.ex = 0;
-	ptr->line.ey = 0;
+	ptr->line.x0 = 0;
+	ptr->line.y0 = 0;
+	ptr->line.x1 = 0;
+	ptr->line.y1 = 0;
 	ptr->line.k = 0;
 	ptr->line.b = 0;
 	ptr->line.dx = 0;

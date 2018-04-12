@@ -41,7 +41,7 @@ void	put_pixel(t_img *img, int x, int y, t_color color)
 	img->image[y * img->val + 4 * x + 2] = color.channel[2];
 }
 
-int exit_x(void)
+int		exit_x(void)
 {
 	printf("\033[0;31mEXIT\033[0m\n");
 	exit(1);
@@ -79,11 +79,11 @@ int		main(int argc, char **argv)
 		return (0);
 	gen.img.image = mlx_get_data_addr(gen.img.img, &gen.img.bpp, &gen.img.val, &gen.img.ed);
 	gen.color.color = 0xFFFFFF;
-	ft_line(&gen.line, &gen.map, gen.color, &gen.img);
+	ft_line(&gen);
 	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, 49, 49);
 	mlx_hook(gen.mlx.win, 2, 5, key_hook, &gen);
 	mlx_hook(gen.mlx.win, 17, 1L << 17, exit_x, NULL);
-	system("leaks fdf");
+	//system("leaks fdf");
 	mlx_loop(gen.mlx.init);
 	return (0);
 }

@@ -38,6 +38,24 @@ void	turn(t_general *gen, double a, double b, double g)
 		i++;
 	}
 	//printf("2. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
-	ft_line(&gen->line, &gen->map, gen->color, &gen->img);
+	ft_line(gen);
 	mlx_put_image_to_window(gen->mlx.init, gen->mlx.win, gen->img.img, 49, 49);
+}
+
+void	ft_line(t_general *gen)
+{
+	int		i;
+
+	i = 0;
+	while (i < gen->map.len * gen->map.rows)
+	{
+		defline(&gen->line, &gen->map, i, 0);
+		if (coefline(gen) == 1)
+			plotline(gen);
+		defline(&gen->line, &gen->map, i, 1);
+		if (coefline(gen) == 1)
+			plotline(gen);
+		i++;
+	}
+	printf("\n========\n\n");
 }

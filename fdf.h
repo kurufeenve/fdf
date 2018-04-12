@@ -104,9 +104,12 @@ void				ft_drawpoints(t_map *map, t_img *img, t_color color);
 void				put_pixel(t_img *img, int x, int y, t_color color);
 void				vertline(t_line *line, t_img *img, t_color color);
 int					defline(t_line *line, t_map *map, int i, int l);
-void				drawline(t_general	*gen);
+int					coefline(t_general	*gen);
 void				ft_clearscr(t_img *img, t_mlx *mlx);
 int					key_hook(int key, void *ptr);
 void				turn(t_general *gen, double a, double b, double g);
+void				coordswap(t_line *line);
+void				ft_line(t_general *gen);
+void				plotline(t_general *gen);
 
 #endif
