@@ -33,7 +33,17 @@ void	ft_recalc(t_map *map, t_mlx *ent)
 	// 	printf("i = %d, x = %f, y = %f\n", i, map->points[i].x, map->points[i].y);
 	// 	i++;
 	// }
-	while (j < map)
+	while (j < map->rows)
+	{
+		k = 0;
+		while (k < map->len)
+		{
+			map->points[i].x = map->points[i].x + (map->coefx * k);
+			map->points[i].y = map->points[i].y + (map->coefy * j);
+			k++;
+		}
+		j++;
+	}
 }
 
 
