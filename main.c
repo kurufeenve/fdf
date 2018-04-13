@@ -80,7 +80,7 @@ int		main(int argc, char **argv)
 	gen.img.image = mlx_get_data_addr(gen.img.img, &gen.img.bpp, &gen.img.val, &gen.img.ed);
 	gen.color.color = 0xFFFFFF;
 	ft_line(&gen);
-	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, 49, 49);
+	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, gen.mlx.size_x / 2, gen.mlx.size_y / 2);
 	mlx_hook(gen.mlx.win, 2, 5, key_hook, &gen);
 	mlx_hook(gen.mlx.win, 17, 1L << 17, exit_x, NULL);
 	//system("leaks fdf");

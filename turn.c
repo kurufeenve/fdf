@@ -39,7 +39,7 @@ void	turn(t_general *gen, double a, double b, double g)
 	}
 	//printf("2. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
 	ft_line(gen);
-	mlx_put_image_to_window(gen->mlx.init, gen->mlx.win, gen->img.img, 49, 49);
+	mlx_put_image_to_window(gen->mlx.init, gen->mlx.win, gen->img.img, gen->mlx.size_x / 2, gen->mlx.size_y / 2);
 }
 
 void	ft_line(t_general *gen)

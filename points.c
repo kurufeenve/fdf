@@ -15,16 +15,25 @@
 void	ft_recalc(t_map *map, t_mlx *ent)
 {
 	int		i;
+	int		j;
+	int		k;
 
 	i = 0;
+	j = 0;
+	k = 0;
 	map->coefx = ent->size_x / map->len;
 	map->coefy = ent->size_y / map->rows;
-	while (i < (map->rows * map->len))
-	{
-		map->points[i].x = map->points[i].x * map->coefx;
-		map->points[i].y = map->points[i].y * map->coefy;
-		i++;
-	}
+	map->points[i].x = -(ent->size_x / 2);
+	map->points[i++].y = -(ent->size_y / 2);
+	printf("len = %d, rows = %d\nx = %f, y = %f\n", map->len, map->rows, map->points[0].x, map->points[0].y);
+	// while (i < (map->rows * map->len))
+	// {
+	// 	map->points[i].x = map->points[i].x * map->coefx;
+	// 	map->points[i].y = map->points[i].y * map->coefy;
+	// 	printf("i = %d, x = %f, y = %f\n", i, map->points[i].x, map->points[i].y);
+	// 	i++;
+	// }
+	while (j < map)
 }
 
 
