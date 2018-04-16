@@ -21,7 +21,7 @@ void	turn(t_general *gen, double a, double b, double g)
 
 	i = 0;
 	ft_clearscr(&gen->img, &gen->mlx);
-	//printf("1. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
+	//printf("1. x = %f, y = %f, z = %f\n", gen->map.points[3].x, gen->map.points[3].y, gen->map.points[3].z);
 	while (i < gen->map.len * gen->map.rows)
 	{
 		tmpx = gen->map.points[i].x;
@@ -37,9 +37,9 @@ void	turn(t_general *gen, double a, double b, double g)
 		cos(a) * sin(b) * sin(g));
 		i++;
 	}
-	//printf("2. x = %f, y = %f, z = %f\n", gen->map.points[0].x, gen->map.points[0].y, gen->map.points[0].z);
+	//printf("2. x = %f, y = %f, z = %f\n", gen->map.points[3].x, gen->map.points[3].y, gen->map.points[3].z);
 	ft_line(gen);
-	mlx_put_image_to_window(gen->mlx.init, gen->mlx.win, gen->img.img, gen->mlx.size_x / 2, gen->mlx.size_y / 2);
+	mlx_put_image_to_window(gen->mlx.init, gen->mlx.win, gen->img.img, 49, 49);
 }
 
 void	ft_line(t_general *gen)
@@ -49,12 +49,19 @@ void	ft_line(t_general *gen)
 	i = 0;
 	while (i < gen->map.len * gen->map.rows)
 	{
+		//printf("test1\n");
 		defline(&gen->line, &gen->map, i, 0);
+		// printf("horisontal gen->line.x0 = %f, gen->line.x1 = %f, gen->line.y0 = %f, gen->line.y1 = %f\n", 
+		// gen->line.x0, gen->line.x1, gen->line.y0, gen->line.y1);
 		if (coefline(gen) == 1)
 			plotline(gen);
+		//printf("test2\n");
 		defline(&gen->line, &gen->map, i, 1);
+		// printf("vertical gen->line.x0 = %f, gen->line.x1 = %f, gen->line.y0 = %f, gen->line.y1 = %f\n", 
+		// gen->line.x0, gen->line.x1, gen->line.y0, gen->line.y1);
 		if (coefline(gen) == 1)
 			plotline(gen);
+		//printf("test3\n");
 		i++;
 	}
 	printf("\n========\n\n");

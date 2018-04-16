@@ -64,7 +64,6 @@ int		main(int argc, char **argv)
 		return (0);
 	init_gen(&gen);
 	ft_map(argv[1], &gen.map);
-	printf("test1\n");
 	gen.mlx.init = mlx_init();
 	gen.mlx.size_x = 1000;
 	gen.mlx.size_y = 1000;
@@ -80,10 +79,10 @@ int		main(int argc, char **argv)
 	gen.img.image = mlx_get_data_addr(gen.img.img, &gen.img.bpp, &gen.img.val, &gen.img.ed);
 	gen.color.color = 0xFFFFFF;
 	ft_line(&gen);
-	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, gen.mlx.size_x / 2, gen.mlx.size_y / 2);
+	mlx_put_image_to_window(gen.mlx.init, gen.mlx.win, gen.img.img, 49, 49);
 	mlx_hook(gen.mlx.win, 2, 5, key_hook, &gen);
 	mlx_hook(gen.mlx.win, 17, 1L << 17, exit_x, NULL);
-	//system("leaks fdf");
+	system("leaks fdf");
 	mlx_loop(gen.mlx.init);
 	return (0);
 }

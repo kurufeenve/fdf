@@ -20,27 +20,21 @@ void	ft_recalc(t_map *map, t_mlx *ent)
 
 	i = 0;
 	j = 0;
-	k = 0;
-	map->coefx = ent->size_x / map->len;
-	map->coefy = ent->size_y / map->rows;
-	map->points[i].x = -(ent->size_x / 2);
-	map->points[i++].y = -(ent->size_y / 2);
-	printf("len = %d, rows = %d\nx = %f, y = %f\n", map->len, map->rows, map->points[0].x, map->points[0].y);
-	// while (i < (map->rows * map->len))
-	// {
-	// 	map->points[i].x = map->points[i].x * map->coefx;
-	// 	map->points[i].y = map->points[i].y * map->coefy;
-	// 	printf("i = %d, x = %f, y = %f\n", i, map->points[i].x, map->points[i].y);
-	// 	i++;
-	// }
+	map->coefx = (ent->size_x - 100) / (map->len - 1);
+	map->coefy = (ent->size_y - 100) / (map->rows - 1);
+	map->points[0].x = 0;
+	map->points[0].y = 0;
+	//printf("len = %d, rows = %d\ni = 0, x = %f, y = %f\n", map->len, map->rows, map->points[0].x, map->points[0].y);
 	while (j < map->rows)
 	{
 		k = 0;
 		while (k < map->len)
 		{
-			map->points[i].x = map->points[i].x + (map->coefx * k);
-			map->points[i].y = map->points[i].y + (map->coefy * j);
+			map->points[i].x = map->coefx * k;
+			map->points[i].y = map->coefy * j;
+			//printf("i = %d, x = %f, y = %f, coefx = %f, coefy = %f, k = %d, j = %d\n", i, map->points[i].x, map->points[i].y, map->coefx, map->coefy, k, j);
 			k++;
+			i++;
 		}
 		j++;
 	}

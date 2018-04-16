@@ -19,11 +19,13 @@ void	plotline(t_general *gen)
 		//printf("aslope x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", gen->line.x0, gen->line.y0, gen->line.x1, gen->line.y1);
 		if (gen->line.x0 > gen->line.x1)
 			coordswap(&gen->line);
-		printf("aslope	x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", gen->line.x0, gen->line.y0, gen->line.x1, gen->line.y1);
-		while (gen->line.x0 <= gen->line.x1)
+		//printf("aslope	x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", gen->line.x0, gen->line.y0, gen->line.x1, gen->line.y1);
+		while (gen->line.x0 < gen->line.x1)
 		{
+			if (gen->line.x0 < 0 || gen->line.x1 < 0 || gen->line.y0 < 0 || gen->line.y1 < 0)
+				return;
 			put_pixel(&gen->img, gen->line.x0, gen->line.y0, gen->color);
-			printf("line x = %f\ty = %f\n", gen->line.x0, gen->line.y0);
+			//printf("line x = %f\ty = %f\n", gen->line.x0, gen->line.y0);
 			gen->line.y0 = gen->line.k * gen->line.x0 + gen->line.b;
 			gen->line.x0++;
 		}
@@ -33,11 +35,13 @@ void	plotline(t_general *gen)
 		//printf("steep x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", gen->line.x0, gen->line.y0, gen->line.x1, gen->line.y1);
 		if (gen->line.y0 > gen->line.y1)
 			coordswap(&gen->line);
-		printf("steep	x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", gen->line.x0, gen->line.y0, gen->line.x1, gen->line.y1);
-		while (gen->line.y0 <= gen->line.y1)
+		//printf("steep	x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", gen->line.x0, gen->line.y0, gen->line.x1, gen->line.y1);
+		while (gen->line.y0 < gen->line.y1)
 		{
+			if (gen->line.x0 < 0 || gen->line.x1 < 0 || gen->line.y0 < 0 || gen->line.y1 < 0)
+				return;
 			put_pixel(&gen->img, gen->line.x0, gen->line.y0, gen->color);
-			printf("line x = %f\ty = %f\n", gen->line.x0, gen->line.y0);
+			//printf("line x = %f\ty = %f\n", gen->line.x0, gen->line.y0);
 			gen->line.x0 = (gen->line.y0 - gen->line.b) / gen->line.k;
 			gen->line.y0++;
 		}
@@ -74,17 +78,19 @@ int		coefline(t_general	*gen)
 void	vertline(t_line *line, t_img *img, t_color color)
 {
 	if (line->y1 > line->y0)
-		while (line->y0 < line->y1)
+		while (line->y1 > line->y0)
 		{
+			if (line->x0 < 0 || line->x1 < 0 || line->y0 < 0 || line->y1 < 0)
+				return;
 			put_pixel(img, (int)line->x0, (int)line->y0, color);
-			printf("line x = %f\ty = %f\n", line->x0, line->y0);
 			line->y0++;
 		}
 	if (line->y1 < line->y0)
-		while (line->y0 < line->y1)
+		while (line->y1 < line->y0)
 		{
+			if (line->x0 < 0 || line->x1 < 0 || line->y0 < 0 || line->y1 < 0)
+				return;
 			put_pixel(img, (int)line->x0, (int)line->y0, color);
-			printf("line x = %f\ty = %f\n", line->x0, line->y0);
 			line->y0--;
 		}
 }
@@ -100,7 +106,6 @@ int		defline(t_line *line, t_map *map, int i, int l)
 		i++;
 		line->x1 = map->points[i].x;
 		line->y1 = map->points[i].y;
-		printf("horisontal	x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", line->x0, line->y0, line->x1, line->y1);
 		return (1);
 	}
 	else
@@ -112,7 +117,6 @@ int		defline(t_line *line, t_map *map, int i, int l)
 		i = i + map->len;
 		line->x1 = map->points[i].x;
 		line->y1 = map->points[i].y;
-		printf("vertical	x0 = %f\ty0 = %f\tx1 = %f\ty1 = %f\n", line->x0, line->y0, line->x1, line->y1);
 		return (1);
 	}
 }
